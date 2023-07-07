@@ -2,7 +2,7 @@ package howmanywords;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import domain.file;
+import domain.*;
 
 public class HowManyWords{
     
@@ -23,10 +23,42 @@ public class HowManyWords{
             System.out.println("Error");
         }
     }
+    public static void file(){
+        file file = new file();
+        BufferedReader BR = new BufferedReader(new InputStreamReader(System.in));
+        boolean err;
+        String exist = "", namef;
+        do{
+            try{
+                err = false;
+                System.out.println("Do you already have a file? (yes/no)");
+                exist = BR.readLine();
+                if(!exist.equals("yes") || !exist.equals("no")) throw new fileexists("You have to write yes or no");
+            } catch (fileexists e){
+                System.out.println("You have to write yes or no");
+                err = true;
+            } catch (IOException e){
+                System.out.println("There was an error");
+                err = true;
+            }
+        }while(err == true);
+        try{
+            if(exist.equals("yes")){
+                System.out.println("Whats the name of the file?");
+                namef = BR.readLine();
+                file.read(namef);
+            } else{
+                System.out.println("What's the name you want for the file?");
+                namef = BR.readLine();
+                file.write(namef);
+            }
+        } catch (Exception e){
+            System.out.println("There was an error opening the file");
+        }
+    }
 
     public static void main(String[] args)throws IOException {
         BufferedReader BR = new BufferedReader(new InputStreamReader(System.in));
-        file file = new file();
         int count = 0, parag = 1, op;
         do{
             System.out.println("Options: ");
@@ -37,6 +69,7 @@ public class HowManyWords{
             
             switch(op){
                 case 1:
+                file();
                     break;
                 case 2:
                     count();

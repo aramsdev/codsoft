@@ -33,7 +33,7 @@ public class HowManyWords{
                 err = false;
                 System.out.println("Do you already have a file? (yes/no)");
                 exist = BR.readLine();
-                if(!exist.equals("yes") || !exist.equals("no")) throw new fileexists("You have to write yes or no");
+                if(!exist.equals("yes") && !exist.equals("no")) throw new fileexists("You have to write yes or no");
             } catch (fileexists e){
                 System.out.println("You have to write yes or no");
                 err = true;

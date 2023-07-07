@@ -12,7 +12,7 @@ public class file{
     BufferedReader BR = new BufferedReader(new InputStreamReader(System.in));
     public int write(String name) throws Exception{
         DataOutputStream DOS = null;
-        String text = "";
+        String text;
         
         try{
             DOS = new DataOutputStream(new FileOutputStream(name, true));
@@ -23,7 +23,7 @@ public class file{
         
         try{
             do{
-                System.out.println("Insert the text you wanna have in the file");
+                System.out.println("Insert the text you wanna have in the file. ['exit' to end text]");
                 text = BR.readLine();
                 if(text.equals("exit")){
                     break;
@@ -34,10 +34,14 @@ public class file{
         } catch(Exception e){
             
         }
+        DOS.close();
         return 0;
     }
     public int read(String name) throws Exception{
         DataInputStream DIS = null;
+        String words[] = null;
+        int count = 0;
+
         try{
             DIS = new DataInputStream(new FileInputStream(name));
         } catch(FileNotFoundException e){
@@ -45,10 +49,15 @@ public class file{
         }
         
         try{
-            
+            while(DIS.available() != 0){
+                words = DIS.readUTF().split("\\s+");
+                count = count + words.length;
+            }
         }catch(Exception e){
             System.out.println("There was an error");
         }
+        DIS.close();
+        System.out.println("NUmber of words: " + count);
         return 0;
     }
 }

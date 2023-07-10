@@ -57,7 +57,7 @@ public class file{
             System.out.println("There was an error");
         }
         DIS.close();
-        System.out.println("NUmber of words: " + count);
+        System.out.println("Number of words: " + count);
         return 0;
     }
 }

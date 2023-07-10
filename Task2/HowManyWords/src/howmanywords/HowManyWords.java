@@ -51,6 +51,7 @@ public class HowManyWords{
                 System.out.println("What's the name you want for the file?");
                 namef = BR.readLine();
                 file.write(namef);
+                file.read(namef);
             }
         } catch (Exception e){
             System.out.println("There was an error opening the file");
@@ -69,7 +70,7 @@ public class HowManyWords{
             
             switch(op){
                 case 1:
-                file();
+                    file();
                     break;
                 case 2:
                     count();

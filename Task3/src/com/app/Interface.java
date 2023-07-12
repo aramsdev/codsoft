@@ -79,12 +79,22 @@ public class Interface extends javax.swing.JFrame {
         Home.setForeground(new java.awt.Color(255, 255, 255));
         Home.setText("Home");
         Home.setBorder(null);
+        Home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HomeActionPerformed(evt);
+            }
+        });
 
         Groups.setBackground(new java.awt.Color(102, 0, 204));
         Groups.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Groups.setForeground(new java.awt.Color(255, 255, 255));
         Groups.setText("Groups");
         Groups.setBorder(null);
+        Groups.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GroupsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
@@ -177,6 +187,14 @@ public class Interface extends javax.swing.JFrame {
     private void StudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentsActionPerformed
         ShowJPanel(new students());
     }//GEN-LAST:event_StudentsActionPerformed
+
+    private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
+        ShowJPanel(new home());
+    }//GEN-LAST:event_HomeActionPerformed
+
+    private void GroupsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GroupsActionPerformed
+        ShowJPanel(new editStudent());
+    }//GEN-LAST:event_GroupsActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

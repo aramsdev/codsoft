@@ -202,6 +202,9 @@
                   <Border info="null"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HomeActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="Groups">
               <Properties>
@@ -219,6 +222,9 @@
                   <Border info="null"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GroupsActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -1,10 +1,10 @@
 package com.views;
-import db.database;
-import domain.*;
 
-public class uploadStudent extends javax.swing.JPanel{
+import static com.app.Interface.ShowJPanel;
 
-    public uploadStudent() {
+public class editStudent extends javax.swing.JPanel {
+
+    public editStudent() {
         initComponents();
     }
 
@@ -29,10 +29,10 @@ public class uploadStudent extends javax.swing.JPanel{
         jPanel1 = new javax.swing.JPanel();
         Submit = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(470, 440));
+        setPreferredSize(new java.awt.Dimension(470, 518));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
-        bg.setPreferredSize(new java.awt.Dimension(470, 440));
+        bg.setPreferredSize(new java.awt.Dimension(470, 518));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -41,11 +41,6 @@ public class uploadStudent extends javax.swing.JPanel{
         FirstName.setBackground(new java.awt.Color(255, 255, 255));
         FirstName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         FirstName.setForeground(new java.awt.Color(153, 153, 153));
-        FirstName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FirstNameActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -97,11 +92,6 @@ public class uploadStudent extends javax.swing.JPanel{
         Submit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Submit.setForeground(new java.awt.Color(255, 255, 255));
         Submit.setText("Submit");
-        Submit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SubmitActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -163,15 +153,15 @@ public class uploadStudent extends javax.swing.JPanel{
                 .addGap(40, 40, 40)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(LastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(Grade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(RollNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(bgLayout.createSequentialGroup()
@@ -195,35 +185,14 @@ public class uploadStudent extends javax.swing.JPanel{
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 470, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void FirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstNameActionPerformed
-        
-    }//GEN-LAST:event_FirstNameActionPerformed
-
-    private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
-        try{
-            String firstName = FirstName.getText();
-            String lastName = LastName.getText();
-            String grade = Grade.getText();
-            String rollNumber = RollNumber.getText();
-            int age = Integer.parseInt(Age.getText());
-            student student1 = new student(firstName, lastName, rollNumber, grade);
-            upload(student1);
-        } catch (noNulls e){
-            System.out.println("");
-        }
-    }//GEN-LAST:event_SubmitActionPerformed
-
-    public void upload(student student1){
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Age;

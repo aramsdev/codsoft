@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class database{
     protected Connection connection;
@@ -13,12 +15,12 @@ public class database{
     private final String pass = "";
     
     public void Connect() throws ClassNotFoundException {
-        try{
             Class.forName("com.mysql.cj.jdbc.Driver");
+        try {
             connection = DriverManager.getConnection(url, user, pass);
-        }catch (SQLException e){
-            System.out.println(e);
-        }    
+        } catch (SQLException ex) {
+            Logger.getLogger(database.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void Close() throws SQLException{

@@ -208,22 +208,8 @@ public class uploadStudent extends javax.swing.JPanel{
     }//GEN-LAST:event_FirstNameActionPerformed
 
     private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
-        try{
-            String firstName = FirstName.getText();
-            String lastName = LastName.getText();
-            String grade = Grade.getText();
-            String rollNumber = RollNumber.getText();
-            int age = Integer.parseInt(Age.getText());
-            student student1 = new student(firstName, lastName, rollNumber, grade);
-            upload(student1);
-        } catch (noNulls e){
-            System.out.println("");
-        }
+        com.models.Students student = new com.models.Students();       
     }//GEN-LAST:event_SubmitActionPerformed
-
-    public void upload(student student1){
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Age;

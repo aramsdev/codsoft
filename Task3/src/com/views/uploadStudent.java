@@ -1,4 +1,6 @@
 package com.views;
+import com.app.DAOStudentsImpl;
+import com.interfaces.DAOStudents;
 import db.database;
 import domain.*;
 
@@ -208,7 +210,14 @@ public class uploadStudent extends javax.swing.JPanel{
     }//GEN-LAST:event_FirstNameActionPerformed
 
     private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
-        com.models.Students student = new com.models.Students();       
+        com.models.Students student = new com.models.Students();
+        
+        try {
+            DAOStudents DAO = new DAOStudentsImpl();
+            DAO.upload(student);
+        } catch(Exception e){
+            System.out.println(e);
+        }
     }//GEN-LAST:event_SubmitActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -10,12 +10,13 @@ import java.util.logging.Logger;
 
 public class database{
     protected Connection connection;
-    private final String url = "jdbc:mysql://localhost:3306/Task3";
+    private final String url = "jdbc:mysql://127.0.0.1:3306/school";
     private final String user = "root";
     private final String pass = "";
+    private final String driver = "com.mysql.cj.jdbc.Driver";
     
     public void Connect() throws ClassNotFoundException {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(driver);
         try {
             connection = DriverManager.getConnection(url, user, pass);
         } catch (SQLException ex) {

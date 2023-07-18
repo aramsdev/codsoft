@@ -1,13 +1,19 @@
 package com.views;
 import db.database;
+import com.app.DAOStudentsImpl;
 
 import static com.app.Interface.ShowJPanel;
+import javax.swing.table.DefaultTableModel;
 
 public class students extends javax.swing.JPanel {
 
     public students() {
         initComponents();
     }
+    
+    DefaultTableModel studentsTable = new DefaultTableModel();
+    
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -39,14 +45,14 @@ public class students extends javax.swing.JPanel {
 
             },
             new String [] {
-                "id", "FirstName", "LastName", "Age", "Grade", "RollNumber"
+                "id", "FirstName", "LastName", "Grade", "RollNumber"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true
+                false, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -59,6 +65,13 @@ public class students extends javax.swing.JPanel {
         });
         Table.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(Table);
+        if (Table.getColumnModel().getColumnCount() > 0) {
+            Table.getColumnModel().getColumn(0).setHeaderValue("id");
+            Table.getColumnModel().getColumn(1).setHeaderValue("FirstName");
+            Table.getColumnModel().getColumn(2).setHeaderValue("LastName");
+            Table.getColumnModel().getColumn(3).setHeaderValue("Grade");
+            Table.getColumnModel().getColumn(4).setHeaderValue("RollNumber");
+        }
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Search");
@@ -122,7 +135,7 @@ public class students extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(column, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -135,7 +148,7 @@ public class students extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

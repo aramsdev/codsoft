@@ -5,7 +5,6 @@ public class Students {
     private String lastName;
     private String grade;
     private String rollNumber;
-    private int age;
 
     public String getFirstName() {
         return firstName;
@@ -37,14 +36,12 @@ public class Students {
 
     public void setRollNumber(String rollNumber) {
         this.rollNumber = rollNumber;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
+    }  
     
+    public Students(String fn, String ln, String grade, String rn){
+        this.firstName = fn;
+        this.lastName = ln;
+        this.rollNumber = rn;
+        this.grade = grade;
+    }
 }

@@ -3,7 +3,12 @@ import db.database;
 import com.app.DAOStudentsImpl;
 
 import static com.app.Interface.ShowJPanel;
+import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import com.app.DAOStudentsImpl;
+import com.interfaces.DAOStudents;
 
 public class students extends javax.swing.JPanel {
 
@@ -13,7 +18,34 @@ public class students extends javax.swing.JPanel {
     
     DefaultTableModel studentsTable = new DefaultTableModel();
     
+    public void loadData(JTable studentsTable1) throws Exception{
+        try{
+            DAOStudents DAO = new DAOStudentsImpl();
+            ArrayList<Object> colNames = new ArrayList<>();
+            colNames.removeAll(colNames);
+            colNames.add("id");
+            colNames.add("First Name");
+            colNames.add("Last Name");
+            colNames.add("Grade");
+            colNames.add("RollNumber");
 
+            for(Object column : colNames){
+                studentsTable.addColumn((TableColumn) column);
+            }
+            for(com.models.Students data : DAO.showall()){
+                studentsTable.addRow(new Object[]{
+                    data.getFirstName(),
+                    data.getLastName(),
+                    data.getGrade(),
+                    data.getRollNumber(),
+                }); 
+            }
+            studentsTable1.setModel(studentsTable);
+        }catch (Exception e){
+            System.out.println(e);
+        }    
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -22,7 +54,7 @@ public class students extends javax.swing.JPanel {
         bg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
+        tableStudents = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         column = new javax.swing.JTextField();
         search = new javax.swing.JTextField();
@@ -37,10 +69,10 @@ public class students extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Students");
 
-        Table.setBackground(new java.awt.Color(255, 255, 255));
-        Table.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        Table.setForeground(new java.awt.Color(102, 102, 102));
-        Table.setModel(new javax.swing.table.DefaultTableModel(
+        tableStudents.setBackground(new java.awt.Color(255, 255, 255));
+        tableStudents.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tableStudents.setForeground(new java.awt.Color(102, 102, 102));
+        tableStudents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -63,14 +95,14 @@ public class students extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        Table.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(Table);
-        if (Table.getColumnModel().getColumnCount() > 0) {
-            Table.getColumnModel().getColumn(0).setHeaderValue("id");
-            Table.getColumnModel().getColumn(1).setHeaderValue("FirstName");
-            Table.getColumnModel().getColumn(2).setHeaderValue("LastName");
-            Table.getColumnModel().getColumn(3).setHeaderValue("Grade");
-            Table.getColumnModel().getColumn(4).setHeaderValue("RollNumber");
+        tableStudents.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tableStudents);
+        if (tableStudents.getColumnModel().getColumnCount() > 0) {
+            tableStudents.getColumnModel().getColumn(0).setHeaderValue("id");
+            tableStudents.getColumnModel().getColumn(1).setHeaderValue("FirstName");
+            tableStudents.getColumnModel().getColumn(2).setHeaderValue("LastName");
+            tableStudents.getColumnModel().getColumn(3).setHeaderValue("Grade");
+            tableStudents.getColumnModel().getColumn(4).setHeaderValue("RollNumber");
         }
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -167,7 +199,6 @@ public class students extends javax.swing.JPanel {
         
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Table;
     private javax.swing.JPanel bg;
     private javax.swing.JTextField column;
     private javax.swing.JButton jButton1;
@@ -175,5 +206,6 @@ public class students extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField search;
+    private javax.swing.JTable tableStudents;
     // End of variables declaration//GEN-END:variables
 }

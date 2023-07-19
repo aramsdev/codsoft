@@ -38,13 +38,17 @@ public class DAOStudentsImpl extends database implements DAOStudents{
         Students student = new Students();
         try{
             this.Connect();
-            PreparedStatement st = this.connection.prepareStatement("SELECT * FROM students WHERE id = " + i);
-            rs = st.executeQuery();
-            student.setId(rs.getInt(1));
-            student.setFirstName(rs.getString(2));
-            student.setLastName(rs.getString(3));
-            student.setGrade(rs.getString(4));
-            student.setRollNumber(rs.getString(5));
+            PreparedStatement st = this.connection.prepareStatement("SELECT * FROM students WHERE id = ?;");
+            st.setInt(1, i);
+            
+            ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                student.setId(rs.getInt("id"));
+                student.setFirstName(rs.getString("FirstName"));
+                student.setLastName(rs.getString("LastName"));
+                student.setGrade(rs.getString("Grade"));
+                student.setRollNumber(rs.getString("RollNumber"));
+            }
             rs.close();
             st.close();
         } catch (ClassNotFoundException | SQLException e){
@@ -58,10 +62,20 @@ public class DAOStudentsImpl extends database implements DAOStudents{
     @Override
     public void edit(Students student) throws Exception {
         try{
-            
+            this.Connect();
+            PreparedStatement st = this.connection.prepareStatement("UPDATE students SET FirstName = ?, LastName = ?, Grade = ?, RollNumber = ? WHERE id = ?;");
+            st.setString(1, student.getFirstName());
+            st.setString(2, student.getLastName());
+            st.setString(3, student.getGrade());
+            st.setString(4, student.getRollNumber());
+            st.setInt(5, student.getId());
+            st.executeUpdate();
+            st.close();
         } catch (Exception e){
             System.out.println(e);
-        } 
+        }   finally {
+            this.Close();
+        }
     }
 
     @Override

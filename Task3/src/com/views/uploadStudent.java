@@ -180,7 +180,7 @@ public class uploadStudent extends javax.swing.JPanel{
             DAO.upload(student);
             ShowJPanel(new students());
         }catch (studentException e){
-            javax.swing.JOptionPane.showMessageDialog(this, "One or more fields are empty.\n", "AVISO", javax.swing.JOptionPane.OK_OPTION);
+            javax.swing.JOptionPane.showMessageDialog(this, "One or more fields are empty.\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);
         }catch(Exception e){
             System.out.println(e);
         }

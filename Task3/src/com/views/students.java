@@ -20,6 +20,12 @@ public class students extends javax.swing.JPanel {
     public students() {
         initComponents();
         loadData(tableStudents);
+        styles();
+    }
+    
+    public void styles(){
+        TextPrompt placeholder = new TextPrompt("Search student by name...", name_search);
+        name_search.putClientProperty("JTextField.placeholderText", "Search student by name...");
     }
     
     
@@ -67,7 +73,7 @@ public class students extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableStudents = new javax.swing.JTable();
-        id_search = new javax.swing.JTextField();
+        name_search = new javax.swing.JTextField();
         search = new javax.swing.JButton();
         edit = new javax.swing.JButton();
         delete = new javax.swing.JButton();
@@ -103,12 +109,11 @@ public class students extends javax.swing.JPanel {
         tableStudents.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableStudents);
 
-        id_search.setBackground(new java.awt.Color(255, 255, 255));
-        id_search.setForeground(new java.awt.Color(153, 153, 153));
-        id_search.setText("Insert the Id number of the student");
-        id_search.addActionListener(new java.awt.event.ActionListener() {
+        name_search.setBackground(new java.awt.Color(255, 255, 255));
+        name_search.setForeground(new java.awt.Color(153, 153, 153));
+        name_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                id_searchActionPerformed(evt);
+                name_searchActionPerformed(evt);
             }
         });
 
@@ -154,8 +159,8 @@ public class students extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addComponent(delete)))
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(id_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(name_search, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(search)))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -166,7 +171,7 @@ public class students extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(id_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(name_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(search))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,20 +195,32 @@ public class students extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        try{    
+            String name = name_search.getText();
+            DefaultTableModel model = (DefaultTableModel) tableStudents.getModel();
+            model.setRowCount(0);
+            DAOStudents DAO = new DAOStudentsImpl();
+            DAO.showAll(name).forEach((u) -> model.addRow(new Object[]{u.getId(),u.getFirstName(), u.getLastName(), u.getGrade(), u.getRollNumber()}));
+        } catch (Exception ex) {
+            Logger.getLogger(students.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_searchActionPerformed
 
-    private void id_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_searchActionPerformed
+    private void name_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_searchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_id_searchActionPerformed
+    }//GEN-LAST:event_name_searchActionPerformed
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
         try{   
             DAOStudents DAO = new DAOStudentsImpl();
             if(tableStudents.getSelectedRow() == -1) throw new studentException("Error");
-            int id = (int) tableStudents.getValueAt(tableStudents.getSelectedRow(), 0);
+            int row = (int) tableStudents.getSelectedRow();
+            int id = (int)tableStudents.getValueAt(row, 0);
             ShowJPanel(new editStudent(DAO.search(id)));      
         } catch (studentException e){
             javax.swing.JOptionPane.showMessageDialog(this, "You have to select one student to edit it.\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);
+        } catch (Exception ex) {
+            Logger.getLogger(students.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_editActionPerformed
 
@@ -231,9 +248,9 @@ public class students extends javax.swing.JPanel {
     private javax.swing.JPanel bg;
     private javax.swing.JButton delete;
     private javax.swing.JButton edit;
-    private javax.swing.JTextField id_search;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField name_search;
     private javax.swing.JButton search;
     private javax.swing.JTable tableStudents;
     // End of variables declaration//GEN-END:variables

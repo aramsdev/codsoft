@@ -2,6 +2,7 @@ package com.app;
 import javax.swing.JPanel;
 import com.views.*;
 import java.awt.BorderLayout;
+import javax.swing.JFrame;
 
 public class Interface extends javax.swing.JFrame {
 
@@ -37,6 +38,8 @@ public class Interface extends javax.swing.JFrame {
         Home = new javax.swing.JButton();
         addStudent = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
+        exitProgram = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
         content = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -96,13 +99,28 @@ public class Interface extends javax.swing.JFrame {
 
         jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
 
+        exitProgram.setBackground(new java.awt.Color(102, 0, 204));
+        exitProgram.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        exitProgram.setForeground(new java.awt.Color(255, 255, 255));
+        exitProgram.setText("Exit Program");
+        exitProgram.setBorder(null);
+        exitProgram.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitProgramActionPerformed(evt);
+            }
+        });
+
+        jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(37, 37, 37)
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exitProgram)
                     .addGroup(MenuLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -111,12 +129,12 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(Home)
                     .addComponent(addStudent)
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
-                .addGap(128, 128, 128)
+                .addGap(86, 86, 86)
                 .addComponent(Home)
                 .addGap(33, 33, 33)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,7 +146,11 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(addStudent)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(exitProgram)
+                .addGap(82, 82, 82))
         );
 
         content.setBackground(new java.awt.Color(255, 255, 255));
@@ -193,6 +215,10 @@ public class Interface extends javax.swing.JFrame {
         ShowJPanel(new uploadStudent());
     }//GEN-LAST:event_addStudentActionPerformed
 
+    private void exitProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitProgramActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_exitProgramActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -231,11 +257,13 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton Students;
     private javax.swing.JButton addStudent;
     private static javax.swing.JPanel content;
+    private javax.swing.JButton exitProgram;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -7,17 +7,14 @@ import com.interfaces.DAOStudents;
 import com.models.Students;
 
 public class editStudent extends javax.swing.JPanel {
-
-    public editStudent() {
-        initComponents();
-    }
-    
+    Students studentEdit;
     public editStudent(Students student){
         initComponents();
         FirstName.setText(student.getFirstName());
         LastName.setText(student.getLastName());
         Grade.setText(student.getGrade());
         RollNumber.setText(student.getRollNumber());
+        studentEdit = student;
     }
 
     @SuppressWarnings("unchecked")
@@ -201,12 +198,15 @@ public class editStudent extends javax.swing.JPanel {
             String grade = Grade.getText();
             String rn = RollNumber.getText();
             if(fn.isEmpty() || ln.isEmpty() || grade.isEmpty() || rn.isEmpty()) throw new studentException("One or more fields are empty");
-            com.models.Students student = new com.models.Students(fn,ln,grade,rn);
+            studentEdit.setFirstName(fn);
+            studentEdit.setLastName(ln);
+            studentEdit.setGrade(grade);
+            studentEdit.setRollNumber(rn);
             DAOStudents DAO = new DAOStudentsImpl();
-            DAO.edit(student);
+            DAO.edit(studentEdit);
             ShowJPanel(new students());
         }catch (studentException e){
-            javax.swing.JOptionPane.showMessageDialog(this, "One or more fields are empty.\n", "AVISO", javax.swing.JOptionPane.OK_OPTION);
+            javax.swing.JOptionPane.showMessageDialog(this, "One or more fields are empty.\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);
         }catch(Exception e){
             System.out.println(e);
         }

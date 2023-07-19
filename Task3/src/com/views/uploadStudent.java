@@ -1,5 +1,6 @@
 package com.views;
 import com.app.DAOStudentsImpl;
+import static com.app.Interface.ShowJPanel;
 import com.exceptions.studentException;
 import com.interfaces.DAOStudents;
 import db.database;
@@ -177,8 +178,9 @@ public class uploadStudent extends javax.swing.JPanel{
 
             DAOStudents DAO = new DAOStudentsImpl();
             DAO.upload(student);
+            ShowJPanel(new students());
         }catch (studentException e){
-            JOptionPane.showMessageDialog(this, "One or more fields are empty");
+            javax.swing.JOptionPane.showMessageDialog(this, "One or more fields are empty.\n", "AVISO", javax.swing.JOptionPane.OK_OPTION);
         }catch(Exception e){
             System.out.println(e);
         }

@@ -8,22 +8,31 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import com.app.DAOStudentsImpl;
+import com.exceptions.studentException;
 import com.interfaces.DAOStudents;
 import com.models.Students;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class students extends javax.swing.JPanel {
 
     public students() {
         initComponents();
+        loadData(tableStudents);
     }
     
-    DefaultTableModel studentsTable = new DefaultTableModel();
     
-    public void loadData(JTable studentsTable1) throws Exception{
+    public void loadData(JTable studentsTable1){
         try{
+            DefaultTableModel studentsTable = new DefaultTableModel();
+
             DAOStudents DAO = new DAOStudentsImpl();
+            
+            DefaultTableModel model = (DefaultTableModel) tableStudents.getModel();
+            model.setRowCount(0);
+            model.setColumnCount(0);
+
             ArrayList<Object> colNames = new ArrayList<>();
             colNames.removeAll(colNames);
             colNames.add("id");
@@ -35,7 +44,7 @@ public class students extends javax.swing.JPanel {
             for(Object column : colNames){
                 studentsTable.addColumn(column);
             }
-            for(com.models.Students data : DAO.showall()){
+            for(com.models.Students data : DAO.showAll("")){
                 studentsTable.addRow(new Object[]{
                     data.getId(),
                     data.getFirstName(),
@@ -50,7 +59,6 @@ public class students extends javax.swing.JPanel {
         }    
     }
     
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -60,10 +68,9 @@ public class students extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableStudents = new javax.swing.JTable();
         id_search = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
         search = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        edit = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(470, 518));
 
@@ -105,15 +112,6 @@ public class students extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(102, 51, 255));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Load Data");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         search.setBackground(new java.awt.Color(102, 0, 255));
         search.setForeground(new java.awt.Color(255, 255, 255));
         search.setText("Search Student");
@@ -123,23 +121,21 @@ public class students extends javax.swing.JPanel {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(102, 51, 255));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Edit");
-        jButton4.setEnabled(false);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        edit.setBackground(new java.awt.Color(102, 51, 255));
+        edit.setForeground(new java.awt.Color(255, 255, 255));
+        edit.setText("Edit Student");
+        edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                editActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(255, 0, 0));
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Delete");
-        jButton5.setEnabled(false);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        delete.setBackground(new java.awt.Color(255, 0, 0));
+        delete.setForeground(new java.awt.Color(255, 255, 255));
+        delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                deleteActionPerformed(evt);
             }
         });
 
@@ -150,16 +146,13 @@ public class students extends javax.swing.JPanel {
             .addGroup(bgLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(bgLayout.createSequentialGroup()
-                            .addComponent(jButton3)
-                            .addGap(172, 172, 172)
-                            .addComponent(jButton4)
+                    .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                            .addComponent(edit)
                             .addGap(18, 18, 18)
-                            .addComponent(jButton5))
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(delete)))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addComponent(id_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -177,11 +170,10 @@ public class students extends javax.swing.JPanel {
                     .addComponent(search))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
 
@@ -193,59 +185,53 @@ public class students extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            loadData(tableStudents);
-        } catch (Exception ex) {
-            Logger.getLogger(students.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        try{
-            DAOStudents DAO = new DAOStudentsImpl();
-            int id = Integer.parseInt(id_search.getText());
-            Students student = new Students();
-            student = DAO.search(id);
-            ArrayList<Object> colNames = new ArrayList<>();
-            tableStudents.setRowCount(0);
-
-            for(Object column : colNames){
-                studentsTable.addColumn(column);
-            }
-            
-            studentsTable.addRow({
-                student.getId(),
-            });             
-        } catch (Exception e){
-            System.out.println(e);
-        }
     }//GEN-LAST:event_searchActionPerformed
 
     private void id_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_searchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_id_searchActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
+        try{   
+            DAOStudents DAO = new DAOStudentsImpl();
+            if(tableStudents.getSelectedRow() == -1) throw new studentException("Error");
+            int id = (int) tableStudents.getValueAt(tableStudents.getSelectedRow(), 0);
+            ShowJPanel(new editStudent(DAO.search(id)));      
+        } catch (studentException e){
+            javax.swing.JOptionPane.showMessageDialog(this, "You have to select one student to edit it.\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);
+        }
+    }//GEN-LAST:event_editActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int row = tableStudents.getSelectedRow();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        DAOStudents DAO = new DAOStudentsImpl();
+        DefaultTableModel model = (DefaultTableModel) tableStudents.getModel();
+        try{
+            if(tableStudents.getSelectedRows().length < 1 || tableStudents.getSelectedRow() == -1)throw new studentException("You have to select a user to delete it.");
+            for(int i : tableStudents.getSelectedRows()){
+                int id = (int)tableStudents.getModel().getValueAt(i, 0);
+                DAO.delete(id);
+                model.removeRow(i);
+                javax.swing.JOptionPane.showMessageDialog(this, "Student has been deleted\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);
+            } 
+        }catch (studentException e){
+            javax.swing.JOptionPane.showMessageDialog(this, "You have to select a user to delete it.\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_deleteActionPerformed
 
         
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
+    private javax.swing.JButton delete;
+    private javax.swing.JButton edit;
     private javax.swing.JTextField id_search;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton search;

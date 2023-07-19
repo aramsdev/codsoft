@@ -25,6 +25,7 @@ public class DAOStudentsImpl extends database implements DAOStudents{
             st.setString(3, student.getGrade());
             st.setString(4, student.getRollNumber());
             st.executeUpdate();
+            st.close();
         } catch (Exception e){
             System.out.println(e);
         }   finally {
@@ -64,24 +65,38 @@ public class DAOStudentsImpl extends database implements DAOStudents{
     }
 
     @Override
-    public void delete(Students student) throws Exception {
+    public void delete(int id) throws Exception {
+        try{
+            this.Connect();
+            String Query = "DELETE FROM students WHERE id = ?;";
+            PreparedStatement st = this.connection.prepareStatement(Query);
+            st.setInt(1,id);
+            st.executeUpdate();
+            st.close();
+        } catch(Exception e){
+            System.out.println(e);
+        } finally{
+            this.Close();
+        }
     }
 
     @Override
-    public ArrayList<Students> showall() throws Exception {
-        ArrayList<Students> students = new ArrayList<Students>();
+    public List<Students> showAll(String name) throws Exception {
+        List<Students> students = null;
         try{
             this.Connect();
-            PreparedStatement st = this.connection.prepareStatement("SELECT * FROM students");
+            String Query = name.isEmpty() ? "SELECT * FROM students;" : "SELECT * FROM students WHERE FirstName LIKE '%" + name+"%';";
+            PreparedStatement st = this.connection.prepareStatement(Query);
+            students = new ArrayList();
             rs = st.executeQuery();
                         
             while(rs.next()){
                 Students student = new Students();
-                student.setId(rs.getInt(1));
-                student.setFirstName(rs.getString(2));
-                student.setLastName(rs.getString(3));
-                student.setGrade(rs.getString(4));
-                student.setRollNumber(rs.getString(5));
+                student.setId(rs.getInt("id"));
+                student.setFirstName(rs.getString("FirstName"));
+                student.setLastName(rs.getString("LastName"));
+                student.setGrade(rs.getString("Grade"));
+                student.setRollNumber(rs.getString("RollNumber"));
                 students.add(student);
             }
             rs.close();

@@ -6,11 +6,15 @@ import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
 public class DAOStudentsImpl extends database implements DAOStudents{
-
+    ResultSet rs = null;
+    String fn,ln,grade,rn;
+    int id;
+    
     @Override
     public void upload(Students student) throws Exception {
         try{
@@ -27,6 +31,28 @@ public class DAOStudentsImpl extends database implements DAOStudents{
             this.Close();
         }
     }
+    
+    @Override
+    public Students search(int i) throws Exception {
+        Students student = new Students();
+        try{
+            this.Connect();
+            PreparedStatement st = this.connection.prepareStatement("SELECT * FROM students WHERE id = " + i);
+            rs = st.executeQuery();
+            student.setId(rs.getInt(1));
+            student.setFirstName(rs.getString(2));
+            student.setLastName(rs.getString(3));
+            student.setGrade(rs.getString(4));
+            student.setRollNumber(rs.getString(5));
+            rs.close();
+            st.close();
+        } catch (ClassNotFoundException | SQLException e){
+            System.out.println(e);
+        } finally{
+            this.Close();
+        }
+        return student;
+    }
 
     @Override
     public void edit(Students student) throws Exception {
@@ -39,14 +65,10 @@ public class DAOStudentsImpl extends database implements DAOStudents{
 
     @Override
     public void delete(Students student) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public ArrayList<Students> showall() throws Exception {
-        ResultSet rs = null;
-        String fn,ln,grade,rn;
-        int id;
         ArrayList<Students> students = new ArrayList<Students>();
         try{
             this.Connect();
@@ -54,14 +76,16 @@ public class DAOStudentsImpl extends database implements DAOStudents{
             rs = st.executeQuery();
                         
             while(rs.next()){
-                id = rs.getInt(1);
-                fn = rs.getString(2);
-                ln = rs.getString(3);
-                grade = rs.getString(4);
-                rn = rs.getString(5);
-                students.add(new Students(fn,ln,grade,rn));
+                Students student = new Students();
+                student.setId(rs.getInt(1));
+                student.setFirstName(rs.getString(2));
+                student.setLastName(rs.getString(3));
+                student.setGrade(rs.getString(4));
+                student.setRollNumber(rs.getString(5));
+                students.add(student);
             }
-            return students;
+            rs.close();
+            st.close();
         } catch(Exception e){
             System.out.println(e);
         } finally{

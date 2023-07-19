@@ -1,8 +1,10 @@
 package com.views;
 import com.app.DAOStudentsImpl;
+import com.exceptions.studentException;
 import com.interfaces.DAOStudents;
 import db.database;
 import domain.*;
+import javax.swing.JOptionPane;
 
 public class uploadStudent extends javax.swing.JPanel{
 
@@ -165,16 +167,19 @@ public class uploadStudent extends javax.swing.JPanel{
     }//GEN-LAST:event_FirstNameActionPerformed
 
     private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
-        String fn = FirstName.getText();
-        String ln = LastName.getText();
-        String grade = Grade.getText();
-        String rn = RollNumber.getText();
-        com.models.Students student = new com.models.Students(fn,ln,grade,rn);
-        
         try {
+            String fn = FirstName.getText();
+            String ln = LastName.getText();
+            String grade = Grade.getText();
+            String rn = RollNumber.getText();
+            if(fn.isEmpty() || ln.isEmpty() || grade.isEmpty() || rn.isEmpty()) throw new studentException("One or more fields are empty");
+            com.models.Students student = new com.models.Students(fn,ln,grade,rn);
+
             DAOStudents DAO = new DAOStudentsImpl();
             DAO.upload(student);
-        } catch(Exception e){
+        }catch (studentException e){
+            JOptionPane.showMessageDialog(this, "One or more fields are empty");
+        }catch(Exception e){
             System.out.println(e);
         }
     }//GEN-LAST:event_SubmitActionPerformed

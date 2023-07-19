@@ -5,6 +5,18 @@ public class Students {
     private String lastName;
     private String grade;
     private String rollNumber;
+    private int id;
+
+    public Students() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;

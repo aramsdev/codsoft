@@ -12,6 +12,7 @@ public class editStudent extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         bg = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         FirstName = new javax.swing.JTextField();
@@ -29,6 +30,9 @@ public class editStudent extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         Submit = new javax.swing.JButton();
 
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
         setPreferredSize(new java.awt.Dimension(470, 518));
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
@@ -36,7 +40,7 @@ public class editStudent extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Add New Student");
+        jLabel1.setText("Edit Student");
 
         FirstName.setBackground(new java.awt.Color(255, 255, 255));
         FirstName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -189,7 +193,7 @@ public class editStudent extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -203,6 +207,7 @@ public class editStudent extends javax.swing.JPanel {
     private javax.swing.JTextField RollNumber;
     private javax.swing.JButton Submit;
     private javax.swing.JPanel bg;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

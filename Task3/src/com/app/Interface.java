@@ -33,10 +33,10 @@ public class Interface extends javax.swing.JFrame {
         Menu = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
         Students = new javax.swing.JButton();
         Home = new javax.swing.JButton();
-        Groups = new javax.swing.JButton();
+        addStudent = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
         content = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -61,8 +61,6 @@ public class Interface extends javax.swing.JFrame {
 
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
 
-        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
-
         Students.setBackground(new java.awt.Color(102, 0, 204));
         Students.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Students.setForeground(new java.awt.Color(255, 255, 255));
@@ -85,53 +83,52 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        Groups.setBackground(new java.awt.Color(102, 0, 204));
-        Groups.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Groups.setForeground(new java.awt.Color(255, 255, 255));
-        Groups.setText("Groups");
-        Groups.setBorder(null);
-        Groups.addActionListener(new java.awt.event.ActionListener() {
+        addStudent.setBackground(new java.awt.Color(102, 0, 204));
+        addStudent.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addStudent.setForeground(new java.awt.Color(255, 255, 255));
+        addStudent.setText("Add a Student");
+        addStudent.setBorder(null);
+        addStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GroupsActionPerformed(evt);
+                addStudentActionPerformed(evt);
             }
         });
+
+        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(31, 31, 31)
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(MenuLayout.createSequentialGroup()
-                        .addComponent(Groups)
-                        .addGap(1, 1, 1)
+                        .addGap(54, 54, 54)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Students)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Home))
-                .addContainerGap(99, Short.MAX_VALUE))
+                    .addComponent(Home)
+                    .addComponent(addStudent)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
-                .addGap(145, 145, 145)
+                .addGap(128, 128, 128)
                 .addComponent(Home)
                 .addGap(33, 33, 33)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(Students)
-                .addGap(33, 33, 33)
+                .addGap(45, 45, 45)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MenuLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel3))
-                    .addGroup(MenuLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(Groups)))
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(addStudent)
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
         content.setBackground(new java.awt.Color(255, 255, 255));
@@ -192,9 +189,9 @@ public class Interface extends javax.swing.JFrame {
         ShowJPanel(new home());
     }//GEN-LAST:event_HomeActionPerformed
 
-    private void GroupsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GroupsActionPerformed
-        ShowJPanel(new editStudent());
-    }//GEN-LAST:event_GroupsActionPerformed
+    private void addStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentActionPerformed
+        ShowJPanel(new uploadStudent());
+    }//GEN-LAST:event_addStudentActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -229,10 +226,10 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Groups;
     private javax.swing.JButton Home;
     private javax.swing.JPanel Menu;
     private javax.swing.JButton Students;
+    private javax.swing.JButton addStudent;
     private static javax.swing.JPanel content;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

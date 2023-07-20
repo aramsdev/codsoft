@@ -20,12 +20,6 @@ public class students extends javax.swing.JPanel {
     public students() {
         initComponents();
         loadData(tableStudents);
-        styles();
-    }
-    
-    public void styles(){
-        TextPrompt placeholder = new TextPrompt("Search student by name...", name_search);
-        name_search.putClientProperty("JTextField.placeholderText", "Search student by name...");
     }
     
     
@@ -77,6 +71,7 @@ public class students extends javax.swing.JPanel {
         search = new javax.swing.JButton();
         edit = new javax.swing.JButton();
         delete = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(470, 518));
 
@@ -111,6 +106,7 @@ public class students extends javax.swing.JPanel {
 
         name_search.setBackground(new java.awt.Color(255, 255, 255));
         name_search.setForeground(new java.awt.Color(153, 153, 153));
+        name_search.setText("Search by name...");
         name_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 name_searchActionPerformed(evt);
@@ -144,6 +140,10 @@ public class students extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Name:");
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -151,16 +151,17 @@ public class students extends javax.swing.JPanel {
             .addGroup(bgLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                            .addComponent(edit)
-                            .addGap(18, 18, 18)
-                            .addComponent(delete)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                        .addComponent(edit)
+                        .addGap(18, 18, 18)
+                        .addComponent(delete))
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(name_search, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(name_search, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(search)))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -172,7 +173,8 @@ public class students extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(name_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(search))
+                    .addComponent(search)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -207,7 +209,6 @@ public class students extends javax.swing.JPanel {
     }//GEN-LAST:event_searchActionPerformed
 
     private void name_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_searchActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_name_searchActionPerformed
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
@@ -249,6 +250,7 @@ public class students extends javax.swing.JPanel {
     private javax.swing.JButton delete;
     private javax.swing.JButton edit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField name_search;
     private javax.swing.JButton search;

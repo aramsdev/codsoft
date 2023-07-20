@@ -12,7 +12,7 @@ public class Interface extends javax.swing.JFrame {
     }
     
     private void initContent(){
-         ShowJPanel(new home());
+         ShowJPanel(new students());
     }
     
         public static void ShowJPanel(JPanel panel) {
@@ -33,9 +33,7 @@ public class Interface extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         Menu = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         Students = new javax.swing.JButton();
-        Home = new javax.swing.JButton();
         addStudent = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         exitProgram = new javax.swing.JButton();
@@ -62,8 +60,6 @@ public class Interface extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
 
-        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
-
         Students.setBackground(new java.awt.Color(102, 0, 204));
         Students.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Students.setForeground(new java.awt.Color(255, 255, 255));
@@ -72,17 +68,6 @@ public class Interface extends javax.swing.JFrame {
         Students.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 StudentsActionPerformed(evt);
-            }
-        });
-
-        Home.setBackground(new java.awt.Color(102, 0, 204));
-        Home.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Home.setForeground(new java.awt.Color(255, 255, 255));
-        Home.setText("Home");
-        Home.setBorder(null);
-        Home.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HomeActionPerformed(evt);
             }
         });
 
@@ -117,7 +102,7 @@ public class Interface extends javax.swing.JFrame {
         MenuLayout.setHorizontalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(40, 40, 40)
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exitProgram)
@@ -125,20 +110,14 @@ public class Interface extends javax.swing.JFrame {
                         .addGap(54, 54, 54)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Students)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Home)
                     .addComponent(addStudent)
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(Home)
-                .addGap(33, 33, 33)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(130, 130, 130)
                 .addComponent(Students)
                 .addGap(45, 45, 45)
                 .addComponent(jLabel3)
@@ -150,7 +129,7 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(exitProgram)
-                .addGap(82, 82, 82))
+                .addGap(139, 139, 139))
         );
 
         content.setBackground(new java.awt.Color(255, 255, 255));
@@ -207,10 +186,6 @@ public class Interface extends javax.swing.JFrame {
         ShowJPanel(new students());
     }//GEN-LAST:event_StudentsActionPerformed
 
-    private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
-        ShowJPanel(new home());
-    }//GEN-LAST:event_HomeActionPerformed
-
     private void addStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentActionPerformed
         ShowJPanel(new uploadStudent());
     }//GEN-LAST:event_addStudentActionPerformed
@@ -252,7 +227,6 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Home;
     private javax.swing.JPanel Menu;
     private javax.swing.JButton Students;
     private javax.swing.JButton addStudent;
@@ -261,7 +235,6 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     // End of variables declaration//GEN-END:variables

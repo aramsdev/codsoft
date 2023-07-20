@@ -4,5 +4,5 @@ In the system you will be able to manage the collection of students. You can add
 
 We use Swing to get a more user friendly interface. It's not the best but it works.
 
-All the students will be on a Database named School in a table called Students.
+All the students will be on a Database named School in a table called Students. The script that you will need to run for the database is in the src/db/createdb.sql
 

@@ -65,6 +65,7 @@ public class Interface extends javax.swing.JFrame {
         Students.setForeground(new java.awt.Color(255, 255, 255));
         Students.setText("Students");
         Students.setBorder(null);
+        Students.setContentAreaFilled(false);
         Students.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 StudentsActionPerformed(evt);
@@ -76,6 +77,7 @@ public class Interface extends javax.swing.JFrame {
         addStudent.setForeground(new java.awt.Color(255, 255, 255));
         addStudent.setText("Add a Student");
         addStudent.setBorder(null);
+        addStudent.setContentAreaFilled(false);
         addStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addStudentActionPerformed(evt);
@@ -89,6 +91,7 @@ public class Interface extends javax.swing.JFrame {
         exitProgram.setForeground(new java.awt.Color(255, 255, 255));
         exitProgram.setText("Exit Program");
         exitProgram.setBorder(null);
+        exitProgram.setContentAreaFilled(false);
         exitProgram.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitProgramActionPerformed(evt);

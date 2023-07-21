@@ -5,10 +5,8 @@ import db.database;
 import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class DAOStudentsImpl extends database implements DAOStudents{
     ResultSet rs = null;

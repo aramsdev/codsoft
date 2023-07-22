@@ -1,6 +1,7 @@
 package com.app;
 import com.interfaces.DAOAccounts;
 import com.db.db;
+import com.exceptions.Exceptions;
 import com.models.Account;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -95,9 +96,9 @@ public class DAOAccountsImpl extends db implements DAOAccounts{
             }
             rs.close();
             st.close();
-        } catch (Exception e){
-            System.out.println(e);
-        } finally{
+        } catch(Exception ex){
+            throw new Exceptions("Error");
+        }finally{
             this.Close();
         }
         return account;

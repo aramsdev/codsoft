@@ -2,12 +2,15 @@ package com.views;
 
 import static com.app.App.ShowJPanel;
 import com.app.DAOAccountsImpl;
+import com.exceptions.Exceptions;
+import com.exceptions.Minimum;
 import com.interfaces.DAOAccounts;
 import com.models.Account;
 
 public class DepositWithdraw extends javax.swing.JPanel {
     Account account1 = new Account();
     int id;
+    float balance;
     String username, password;
     public DepositWithdraw(String action, Account account) {
         initComponents();
@@ -17,12 +20,10 @@ public class DepositWithdraw extends javax.swing.JPanel {
         } else{
             actionBtn.setText("Deposit");
         }
+        balance = account1.getBalance();
         username = account1.getUsername();
-        password = account1.getPassword();
-        System.out.println("username");
-        
+        password = account1.getPassword();       
         id = account1.getId();
-        System.out.println(id);
     }
 
     @SuppressWarnings("unchecked")
@@ -34,6 +35,9 @@ public class DepositWithdraw extends javax.swing.JPanel {
         amountInput = new javax.swing.JTextField();
         actionBtn = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        cancel = new javax.swing.JButton();
+
+        setPreferredSize(new java.awt.Dimension(390, 55));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(325, 55));
@@ -59,6 +63,16 @@ public class DepositWithdraw extends javax.swing.JPanel {
         jSeparator1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jSeparator1.setPreferredSize(new java.awt.Dimension(60, 10));
 
+        cancel.setBackground(new java.awt.Color(255, 255, 255));
+        cancel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cancel.setForeground(new java.awt.Color(9, 0, 53));
+        cancel.setText("Cancel");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -75,7 +89,8 @@ public class DepositWithdraw extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,7 +99,8 @@ public class DepositWithdraw extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(amountInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(actionBtn))
+                    .addComponent(actionBtn)
+                    .addComponent(cancel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -94,7 +110,7 @@ public class DepositWithdraw extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,21 +124,29 @@ public class DepositWithdraw extends javax.swing.JPanel {
             float amount = Float.parseFloat(amountInput.getText());
             DAOAccounts DAO = new DAOAccountsImpl();
             if(actionBtn.getText().equals("Withdraw")){
-                account = DAO.Deposit_Withdraw(id, "Withdraw", amount);
+                balance = balance - amount;
+                if(balance < 0) throw new Exceptions("Error");
+                    account = DAO.Deposit_Withdraw(id, "Withdraw", amount); 
             } else {
                 account = DAO.Deposit_Withdraw(id, "Deposit", amount);
             }
-            
             ShowJPanel(new Dashboard(account));
-        } catch (Exception e){
-            System.out.println(e);
+        } catch (Exceptions e){
+            javax.swing.JOptionPane.showMessageDialog(this, "You don't have enough funds.\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);
+        } catch (Exception exc){
+            javax.swing.JOptionPane.showMessageDialog(this, "You need to enter an amount of money.\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_actionBtnActionPerformed
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        ShowJPanel(new Dashboard(account1));
+    }//GEN-LAST:event_cancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actionBtn;
     private javax.swing.JTextField amountInput;
+    private javax.swing.JButton cancel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;

@@ -1,16 +1,28 @@
 package com.views;
 
 import static com.app.App.ShowJPanel;
+import com.app.DAOAccountsImpl;
+import com.interfaces.DAOAccounts;
+import com.models.Account;
 
 public class DepositWithdraw extends javax.swing.JPanel {
-
-    public DepositWithdraw(String action) {
+    Account account1 = new Account();
+    int id;
+    String username, password;
+    public DepositWithdraw(String action, Account account) {
         initComponents();
+        account1 = account;
         if(action.equals("Withdraw")){
             actionBtn.setText("Withdraw");
         } else{
             actionBtn.setText("Deposit");
         }
+        username = account1.getUsername();
+        password = account1.getPassword();
+        System.out.println("username");
+        
+        id = account1.getId();
+        System.out.println(id);
     }
 
     @SuppressWarnings("unchecked")
@@ -91,7 +103,20 @@ public class DepositWithdraw extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void actionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionBtnActionPerformed
-        ShowJPanel(new Dashboard());
+        Account account = new Account();
+        try{
+            float amount = Float.parseFloat(amountInput.getText());
+            DAOAccounts DAO = new DAOAccountsImpl();
+            if(actionBtn.getText().equals("Withdraw")){
+                account = DAO.Deposit_Withdraw(id, "Withdraw", amount);
+            } else {
+                account = DAO.Deposit_Withdraw(id, "Deposit", amount);
+            }
+            
+            ShowJPanel(new Dashboard(account));
+        } catch (Exception e){
+            System.out.println(e);
+        }
     }//GEN-LAST:event_actionBtnActionPerformed
 
 

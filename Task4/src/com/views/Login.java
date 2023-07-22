@@ -1,8 +1,14 @@
 package com.views;
 import static com.app.App.ShowJPanel;
+import com.app.DAOAccountsImpl;
+import com.exceptions.Exceptions;
+import com.interfaces.DAOAccounts;
+import com.models.Account;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Login extends javax.swing.JPanel {
-
+    
     public Login() {
         initComponents();
     }
@@ -16,7 +22,7 @@ public class Login extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         username = new javax.swing.JLabel();
         password = new javax.swing.JLabel();
-        UsernameInput = new javax.swing.JTextField();
+        usernameInput = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         passwordInput = new javax.swing.JPasswordField();
@@ -39,8 +45,8 @@ public class Login extends javax.swing.JPanel {
         password.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         password.setText("Password");
 
-        UsernameInput.setBackground(new java.awt.Color(255, 255, 255));
-        UsernameInput.setBorder(null);
+        usernameInput.setBackground(new java.awt.Color(255, 255, 255));
+        usernameInput.setBorder(null);
 
         passwordInput.setBackground(new java.awt.Color(255, 255, 255));
         passwordInput.setBorder(null);
@@ -75,7 +81,7 @@ public class Login extends javax.swing.JPanel {
                     .addComponent(jSeparator2)
                     .addComponent(password)
                     .addComponent(username)
-                    .addComponent(UsernameInput)
+                    .addComponent(usernameInput)
                     .addComponent(jSeparator1)
                     .addComponent(passwordInput)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -90,7 +96,7 @@ public class Login extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(username)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(UsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
@@ -148,12 +154,23 @@ public class Login extends javax.swing.JPanel {
     }//GEN-LAST:event_singupbtnActionPerformed
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
-        ShowJPanel(new Dashboard());
+        Account account = null;
+        try {
+            String username = usernameInput.getText();
+            String password = String.valueOf(passwordInput.getPassword());
+            if(username.equals("") || password.equals("")) throw new Exceptions("Error");
+            DAOAccounts DAO = new DAOAccountsImpl();
+            account = DAO.login(username, password);
+            ShowJPanel(new Dashboard(account));
+        } catch (Exceptions e){
+            javax.swing.JOptionPane.showMessageDialog(this, "Login Failed.\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);
+        }catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_loginbtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField UsernameInput;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -164,5 +181,6 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JPasswordField passwordInput;
     private javax.swing.JButton singupbtn;
     private javax.swing.JLabel username;
+    private javax.swing.JTextField usernameInput;
     // End of variables declaration//GEN-END:variables
 }

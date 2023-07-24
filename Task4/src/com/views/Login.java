@@ -161,6 +161,7 @@ public class Login extends javax.swing.JPanel {
             if(username.equals("") || password.equals("")) throw new Exceptions("Error");
             DAOAccounts DAO = new DAOAccountsImpl();
             account = DAO.login(username, password);
+            if(account.getFirstName() == null) throw new Exceptions("Error");
             ShowJPanel(new Dashboard(account));
         } catch (Exceptions e){
             javax.swing.JOptionPane.showMessageDialog(this, "Login Failed.\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);

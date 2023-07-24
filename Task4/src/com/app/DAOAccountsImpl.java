@@ -3,8 +3,12 @@ import com.interfaces.DAOAccounts;
 import com.db.db;
 import com.exceptions.Exceptions;
 import com.models.Account;
+import java.security.SecureRandom;
+import java.security.spec.KeySpec;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 public class DAOAccountsImpl extends db implements DAOAccounts{
     ResultSet rs = null;
@@ -15,6 +19,13 @@ public class DAOAccountsImpl extends db implements DAOAccounts{
             this.Connect();
             String username = account.getUsername();
             String password = account.getPassword();
+            SecureRandom random = new SecureRandom();
+            byte[] salt = new byte[16];
+            random.nextBytes(salt);
+            KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            byte[] hash = factory.generateSecret(spec).getEncoded();
+            System.out.println(hash);
             Query = "INSERT INTO accounts(username, password) VALUES (?,?);";
             PreparedStatement st = this.connection.prepareStatement(Query);
             st.setString(1, account.getUsername());

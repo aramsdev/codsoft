@@ -97,12 +97,53 @@ public class DAOContactsImpl extends database implements DAOContacts{
             st.close();
         } catch (ClassNotFoundException | SQLException e){
             System.out.println(e);
+        } finally {
+            this.Close();
         }
     }
     
     @Override
-    public void editContact(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void editContact(Contact contact) throws Exception {
+        try{
+            this.Connect();
+            query = "UPDATE contacts SET name = ?, email = ?, phone = ?, company = ? WHERE id = ?;";
+            PreparedStatement st = this.connection.prepareStatement(query);
+            st.setString(1, contact.getName());
+            st.setString(2, contact.getEmail());
+            st.setString(3, contact.getPhone());
+            st.setString(4, contact.getCompany());
+            st.setInt(5, contact.getId());
+            st.executeUpdate();
+            st.close();
+        } catch(Exception e){
+            System.out.println(e);
+        } finally {
+            this.Close();
+        }
     }
     
+    
+    @Override
+    public Contact searchById(int id) throws Exception {
+        Contact contact = new Contact();
+        try{
+            this.Connect();
+            query = "SELECT * FROM contacts WHERE id ="+ id +";";
+            PreparedStatement st = this.connection.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            
+            while(rs.next()){
+                contact.setId(rs.getInt("id"));
+                contact.setName(rs.getString("name"));
+                contact.setEmail(rs.getString("email"));
+                contact.setPhone(rs.getString("phone"));
+                contact.setCompany(rs.getString("company"));
+            }
+        } catch(Exception e){
+            System.out.println(e);
+        } finally{
+            this.Close();
+        }
+        return contact;
+    }
 }

@@ -3,6 +3,7 @@ package com.views;
 import static com.app.App.ShowJPanel;
 import com.app.DAOContactsImpl;
 import com.interfaces.DAOContacts;
+import com.models.Contact;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -14,6 +15,7 @@ public class Contacts extends javax.swing.JPanel {
         initComponents();
         loadContacts(contactsTable, "No");
     }
+    DAOContacts DAO = new DAOContactsImpl();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -97,6 +99,11 @@ public class Contacts extends javax.swing.JPanel {
         editBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         editBtn.setForeground(new java.awt.Color(255, 255, 255));
         editBtn.setText("Edit");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,15 +168,13 @@ public class Contacts extends javax.swing.JPanel {
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        DAOContacts DAO = new DAOContactsImpl();
         try{    
             if(contactsTable.getSelectedRows().length >= 1){
                 for(int i : contactsTable.getSelectedRows()){
                     int id = (int)contactsTable.getModel().getValueAt(i, 0);
-                    System.out.println(i);
                     DAO.deleteContact(id);
                 }
-                JOptionPane.showMessageDialog(this, "You have succesflly deleted the contact.\n");
+                JOptionPane.showMessageDialog(this, "You have succesfully deleted the contact(s).\n");
                 ShowJPanel(new Contacts());
             } else {
                 JOptionPane.showMessageDialog(this, "You have to select one contact to delete it.\n", "ERROR", JOptionPane.OK_OPTION);
@@ -179,12 +184,25 @@ public class Contacts extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        try{
+            if(contactsTable.getSelectedRow() != -1){
+                Contact contact = new Contact();
+                int id = (int)contactsTable.getValueAt(contactsTable.getSelectedRow(), 0);
+                contact = DAO.searchById(id);
+                ShowJPanel(new EditContact(contact));
+            } else {
+                JOptionPane.showMessageDialog(this, "You have to select one contact to edit it.\n", "ERROR", JOptionPane.OK_OPTION);
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_editBtnActionPerformed
+
     public void loadContacts(JTable contactsTable, String search){
         try{
             DefaultTableModel model = new DefaultTableModel();
-            
-            DAOContacts DAO = new DAOContactsImpl();
-            
+                        
             DefaultTableModel table = (DefaultTableModel) contactsTable.getModel();
             table.setRowCount(0);
             table.setColumnCount(0);

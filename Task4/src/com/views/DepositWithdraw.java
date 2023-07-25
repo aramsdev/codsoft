@@ -110,7 +110,7 @@ public class DepositWithdraw extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,6 +133,7 @@ public class DepositWithdraw extends javax.swing.JPanel {
             ShowJPanel(new Dashboard(account));
         } catch (Exceptions e){
             javax.swing.JOptionPane.showMessageDialog(this, "You don't have enough funds.\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);
+            ShowJPanel(new Dashboard(account1));
         } catch (Exception exc){
             javax.swing.JOptionPane.showMessageDialog(this, "You need to enter an amount of money.\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);
         }

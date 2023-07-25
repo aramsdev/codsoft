@@ -1,6 +1,7 @@
 package com.views;
 import static com.app.App.ShowJPanel;
 import com.app.DAOAccountsImpl;
+import com.exceptions.Exceptions;
 import com.interfaces.DAOAccounts;
 import com.models.Account;
 import javax.swing.JOptionPane;
@@ -185,13 +186,13 @@ public class NewAccount extends javax.swing.JPanel {
         String username = usernameInput.getText();
         String pass = String.valueOf(passwordInput.getPassword());
         try{
+            if(fn.isEmpty() || ln.isEmpty() || username.isEmpty() || pass.isEmpty()) throw new Exceptions("Error");
             Account account = new Account(fn,ln,username,pass, 0);
             DAOAccounts DAO = new DAOAccountsImpl();
             DAO.createAccount(account);
             ShowJPanel(new Login());
             JOptionPane.showMessageDialog(this, "You have succesflly created your account, you can now login.\n");
         } catch(Exception e){
-            System.out.println(e);
             javax.swing.JOptionPane.showMessageDialog(this, "You are missing one or more fields.\n", "ERROR", javax.swing.JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_signupActionPerformed

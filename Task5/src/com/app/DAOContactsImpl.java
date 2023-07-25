@@ -13,7 +13,21 @@ public class DAOContactsImpl extends database implements DAOContacts{
     
     @Override
     public void addContact(Contact contact) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            this.Connect();
+            query = "INSERT INTO contacts(name, email, phone, company) VALUES(?,?,?,?);";
+            PreparedStatement st = this.connection.prepareStatement(query);
+            st.setString(1, contact.getName());
+            st.setString(2, contact.getEmail());
+            st.setString(3, contact.getPhone());
+            st.setString(4, contact.getCompany());
+            st.executeUpdate();
+            st.close();
+        } catch(Exception e){
+            System.out.println(e);
+        } finally {
+            this.Close();
+        }
     }
 
     @Override

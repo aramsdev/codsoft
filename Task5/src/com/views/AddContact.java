@@ -7,6 +7,7 @@ import com.interfaces.DAOContacts;
 import com.models.Contact;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class AddContact extends javax.swing.JPanel {
 
@@ -195,11 +196,16 @@ public class AddContact extends javax.swing.JPanel {
         String email = emailInput.getText();
         String phone = phoneInput.getText();
         String company = companyInput.getText();
-        if(name.isEmpty() || email.isEmpty() || phone.isEmpty()) throw new Exceptions("Error: One or more fields are empty");
-        Contact contact = new Contact(name, email, phone, company);
-        try {
+        try{
+            if(name.isEmpty() || email.isEmpty() || phone.isEmpty()) throw new Exceptions("Error: One or more fields are empty.");
+            Contact contact = new Contact(name, email, phone, company);
             DAO.addContact(contact);
-        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "You have succesflly added a new contact.\n");
+            ShowJPanel(new Contacts());
+
+        } catch (Exceptions ex){
+            JOptionPane.showMessageDialog(this, "One or more fields are empty.\n", "ERROR", JOptionPane.OK_OPTION);
+        }catch (Exception ex) {
             Logger.getLogger(AddContact.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_addBtnActionPerformed

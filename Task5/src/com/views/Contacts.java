@@ -4,6 +4,7 @@ import static com.app.App.ShowJPanel;
 import com.app.DAOContactsImpl;
 import com.interfaces.DAOContacts;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -11,7 +12,7 @@ public class Contacts extends javax.swing.JPanel {
 
     public Contacts() {
         initComponents();
-        loadData(contactsTable);
+        loadContacts(contactsTable, "No");
     }
 
     @SuppressWarnings("unchecked")
@@ -66,6 +67,11 @@ public class Contacts extends javax.swing.JPanel {
         searchBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         searchBtn.setForeground(new java.awt.Color(255, 255, 255));
         searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
 
         addBtn.setBackground(new java.awt.Color(35, 85, 255));
         addBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -81,6 +87,11 @@ public class Contacts extends javax.swing.JPanel {
         deleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
         deleteBtn.setText("Delete");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
         editBtn.setBackground(new java.awt.Color(35, 85, 255));
         editBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -140,7 +151,35 @@ public class Contacts extends javax.swing.JPanel {
         ShowJPanel(new AddContact());
     }//GEN-LAST:event_addBtnActionPerformed
 
-    public void loadData(JTable contactsTable){
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        try{
+            String name = nameSearch.getText();
+            loadContacts(contactsTable, name);
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        DAOContacts DAO = new DAOContactsImpl();
+        try{    
+            if(contactsTable.getSelectedRows().length >= 1){
+                for(int i : contactsTable.getSelectedRows()){
+                    int id = (int)contactsTable.getModel().getValueAt(i, 0);
+                    System.out.println(i);
+                    DAO.deleteContact(id);
+                }
+                JOptionPane.showMessageDialog(this, "You have succesflly deleted the contact.\n");
+                ShowJPanel(new Contacts());
+            } else {
+                JOptionPane.showMessageDialog(this, "You have to select one contact to delete it.\n", "ERROR", JOptionPane.OK_OPTION);
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    public void loadContacts(JTable contactsTable, String search){
         try{
             DefaultTableModel model = new DefaultTableModel();
             
@@ -161,14 +200,27 @@ public class Contacts extends javax.swing.JPanel {
             for(Object column : colNames){
                 model.addColumn(column);
             }
-            for(com.models.Contact data : DAO.showContacts()){
-                model.addRow(new Object[]{
-                    data.getId(),
-                    data.getName(),
-                    data.getEmail(),
-                    data.getPhone(),
-                    data.getCompany(),
-                }); 
+            
+            if(search.equals("No")){
+                for(com.models.Contact data : DAO.showContacts()){
+                    model.addRow(new Object[]{
+                        data.getId(),
+                        data.getName(),
+                        data.getEmail(),
+                        data.getPhone(),
+                        data.getCompany(),
+                    }); 
+                }
+            } else {
+                for(com.models.Contact data : DAO.searchContact(search)){
+                    model.addRow(new Object[]{
+                        data.getId(),
+                        data.getName(),
+                        data.getEmail(),
+                        data.getPhone(),
+                        data.getCompany(),
+                    }); 
+                }
             }
             contactsTable.setModel(model);
         }catch (Exception e){
